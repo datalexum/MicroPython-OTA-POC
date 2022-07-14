@@ -1,18 +1,19 @@
- from ota_update.main.ota_updater import OTAUpdater
+from libs.ota_updater import OTAUpdater
+import secrets_config
 
 
- def download_and_install_update_if_available():
-     o = OTAUpdater('url-to-your-github-project')
-     o.install_update_if_available_after_boot('wifi-ssid', 'wifi-password')
+def download_and_install_update_if_available():
+    o = OTAUpdater('https://github.com/datalexum/MicroPython-OTA-POC', github_src_dir='src')
+    o.install_update_if_available_after_boot(secrets_config.WIFI_SSID, secrets_config.WIFI_PASSWORD)
 
 
- def start():
-    print("test")
+def start():
+    import app.start
 
 
- def boot():
-     download_and_install_update_if_available()
-     start()
+def boot():
+    download_and_install_update_if_available()
+    start()
 
 
- boot()
+boot()
